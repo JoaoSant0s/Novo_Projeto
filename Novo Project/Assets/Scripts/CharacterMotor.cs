@@ -12,8 +12,6 @@ public class CharacterMotor : MonoBehaviour
     float maxSpeend = 20f;    
     [SerializeField]
     Transform graphic;
-    [SerializeField]
-    float forcePullToHook;
     #endregion
 
     #region Components    
@@ -37,8 +35,8 @@ public class CharacterMotor : MonoBehaviour
         rg.AddForce(new Vector2(0, jumpForce));        
     }
 
-    internal void AddPullHook(Vector3 direction)
+    internal void Boost(Vector3 force)
     {        
-        rg.AddForce(direction * forcePullToHook, ForceMode2D.Force);
+        rg.AddForce(force, ForceMode2D.Force);
     }
 }
