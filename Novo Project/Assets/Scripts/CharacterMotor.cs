@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,9 @@ public class CharacterMotor : MonoBehaviour
     [SerializeField]
     float maxSpeend = 20f;    
     [SerializeField]
-    Transform graphic;    
+    Transform graphic;
+    [SerializeField]
+    float forcePullToHook;
     #endregion
 
     #region Components    
@@ -34,4 +37,8 @@ public class CharacterMotor : MonoBehaviour
         rg.AddForce(new Vector2(0, jumpForce));        
     }
 
+    internal void AddPullHook(Vector3 direction)
+    {        
+        rg.AddForce(direction * forcePullToHook, ForceMode2D.Force);
+    }
 }
