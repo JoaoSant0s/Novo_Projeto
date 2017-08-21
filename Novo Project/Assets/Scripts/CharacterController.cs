@@ -28,7 +28,7 @@ public class CharacterController : MonoBehaviour
     {        
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGroudn);
 
-        motor.Move(Input.GetAxisRaw("Horizontal") * Time.fixedDeltaTime);         
+        if(grounded) motor.Move(Input.GetAxisRaw("Horizontal") * Time.fixedDeltaTime);         
 
         if (grounded && Input.GetAxisRaw("Vertical") > 0) motor.Jump();
     }    
