@@ -78,16 +78,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\ArmRightController.cs" />
-    <Compile Include="Assets\Scripts\BoostController.cs" />
-    <Compile Include="Assets\Scripts\CameraFollowCharacter.cs" />
-    <Compile Include="Assets\Scripts\Character.cs" />
-    <Compile Include="Assets\Scripts\CharacterController.cs" />
-    <Compile Include="Assets\Scripts\CharacterMotor.cs" />
-    <Compile Include="Assets\Scripts\EnemyController.cs" />
-    <Compile Include="Assets\Scripts\Hook.cs" />
+    <Compile Include="Assets\Scripts\Character\ArmRightController.cs" />
+    <Compile Include="Assets\Scripts\Character\BoostController.cs" />
+    <Compile Include="Assets\Scripts\Character\CameraFollowCharacter.cs" />
+    <Compile Include="Assets\Scripts\Character\Character.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterController.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterMotor.cs" />
+    <Compile Include="Assets\Scripts\Character\Hook.cs" />
+    <Compile Include="Assets\Scripts\Character\ShotController.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyShooter.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Shoot.cs" />
     <Compile Include="Assets\Scripts\Parallaxing.cs" />
-    <Compile Include="Assets\Scripts\ShotController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

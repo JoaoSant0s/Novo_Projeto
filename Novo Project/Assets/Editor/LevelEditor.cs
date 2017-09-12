@@ -4,7 +4,6 @@ using UnityEditor;
 
 public class LevelEditor : EditorWindow 
 {
-
     Texture2D map;
     GameObject baseBuildingPrefab;
     int offsetHeight;
@@ -12,7 +11,7 @@ public class LevelEditor : EditorWindow
 
     static Transform plataformContent;
 
-    [MenuItem("Tools/LevelEditor")]
+    //[MenuItem("Tools/LevelEditor")]
     public static void ShowWindow() 
     {
         GetWindow<LevelEditor>("Level Editor");

@@ -6,11 +6,7 @@ public class CameraFollowCharacter : MonoBehaviour
 {
     [SerializeField]
     Transform target;
-
-    [SerializeField]
-    float smoothSpeed = 0.125f;
-    [SerializeField]
-    float cameraSize;
+        
     [SerializeField]
     Vector3 offset;
 
