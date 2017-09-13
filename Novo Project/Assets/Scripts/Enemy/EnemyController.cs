@@ -1,9 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [Header("AI System")]
+
+    [SerializeField]
+    TriggerDistance trigger;
+    [SerializeField]
+    bool fixedEnemy;
+    [SerializeField]
+    float attackDistance;    
+    [SerializeField]
+    float velocity;
+    [SerializeField]
+    Action action;
+
+    [SerializeField]
+    Rigidbody2D rg;
+
+    public enum State
+    {
+        IDLE,
+        FOLLOWING,
+        ATTACKING
+    }
+
+    State state;
+
     public enum Direction
     {
         left,
@@ -17,8 +40,9 @@ public class EnemyController : MonoBehaviour
         get { return character; }
     }
 
-    private void Start()
+    void Start()
     {
+        state = State.IDLE;
         character = FindObjectOfType<Character>();
     }
 
@@ -33,14 +57,39 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        Flip();               
-    }
-
-    void Flip()
-    {
         var direction = (character.transform.position - transform.position);
         direction.Normalize();
 
+        Flip(direction);
+
+        if (trigger.TriggerFollow && state == State.IDLE) state = State.FOLLOWING;
+
+        if ((character.transform.position.x - transform.position.x) < attackDistance)
+        {
+            state = State.ATTACKING;
+        }
+        else
+        {
+            state = State.FOLLOWING;
+        }
+
+        if (state == State.FOLLOWING)
+        {
+            trigger.TriggerFollow = false;
+            MoveTo(direction);
+        } else if(state == State.ATTACKING)
+        {
+            if(action) action.ExecuteAction();
+        }
+    }
+
+    void MoveTo(Vector3 direction)
+    {
+        rg.velocity = new Vector2(velocity * direction.x, rg.velocity.y);        
+    }
+
+    void Flip(Vector3 direction)
+    {
         if(direction.x < 0 && flipDirection == Direction.right)
         {
             flipDirection = Direction.left;

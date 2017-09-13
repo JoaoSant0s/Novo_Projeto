@@ -1,15 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
-public class EnemyShooter : MonoBehaviour
-{
-    [Header("CONTROLLER:")]
-    [Space]
-
-    [SerializeField]
-    EnemyController control;    
-
+public class ActionEnemyShoot : Action
+{     
     [Header("SHOOT:")]
     [Space]
 
@@ -20,25 +14,19 @@ public class EnemyShooter : MonoBehaviour
     [SerializeField]
     Transform[] spawnPosition;
 
-    private void Start()
-    {       
-        StartCoroutine(ShootingCoroutine());
-    }
-
     IEnumerator ShootingCoroutine()
     {
         yield return new WaitForSeconds(1);
 
         Shooting();
 
-        yield return new WaitForSeconds(2);
-
-        StartCoroutine(ShootingCoroutine());
+        yield return new WaitForSeconds(1);
+        ActivedAction = false;
     }
 
     void Shooting()
     {        
-        var direction = (control.Character.transform.position - transform.position);
+        var direction = (Control.Character.transform.position - transform.position);
         direction.Normalize();        
 
         for (int i = 0; i < spawnPosition.Length; i++)
@@ -53,4 +41,10 @@ public class EnemyShooter : MonoBehaviour
         }
     }
 
+    internal override void ExecuteAction()
+    {
+        if (ActivedAction) return;
+        ActivedAction = true;
+        StartCoroutine(ShootingCoroutine());
+    }
 }

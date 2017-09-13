@@ -86,9 +86,11 @@
     <Compile Include="Assets\Scripts\Character\CharacterMotor.cs" />
     <Compile Include="Assets\Scripts\Character\Hook.cs" />
     <Compile Include="Assets\Scripts\Character\ShotController.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Action.cs" />
+    <Compile Include="Assets\Scripts\Enemy\ActionEnemyShoot.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyController.cs" />
-    <Compile Include="Assets\Scripts\Enemy\EnemyShooter.cs" />
     <Compile Include="Assets\Scripts\Enemy\Shoot.cs" />
+    <Compile Include="Assets\Scripts\Enemy\TriggerDistance.cs" />
     <Compile Include="Assets\Scripts\Parallaxing.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
