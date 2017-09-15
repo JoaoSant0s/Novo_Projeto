@@ -60,17 +60,17 @@ public class EnemyController : MonoBehaviour
         var direction = (character.transform.position - transform.position);
         direction.Normalize();
 
-        Flip(direction);
+        Flip(direction);               
 
-        if (trigger.TriggerFollow && state == State.IDLE) state = State.FOLLOWING;
-
-        if ((character.transform.position.x - transform.position.x) < attackDistance)
+        if (Mathf.Abs(character.transform.position.x - transform.position.x) < attackDistance)
         {
             state = State.ATTACKING;
         }
         else
         {
-            state = State.FOLLOWING;
+            if(state == State.ATTACKING) state = State.FOLLOWING;
+
+            if (trigger.TriggerFollow && state == State.IDLE) state = State.FOLLOWING;
         }
 
         if (state == State.FOLLOWING)
