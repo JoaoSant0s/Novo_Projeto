@@ -44,23 +44,18 @@ public class EnemyController : MonoBehaviour
     {
         state = State.IDLE;
         character = FindObjectOfType<Character>();
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Shot")
-        {
-            DestroyObject(collision.gameObject);
-            DestroyObject(gameObject);
-        }
-    }
+    }   
 
     private void Update()
     {
+        if (!trigger.TriggerFollow) return;
+
         var direction = (character.transform.position - transform.position);
         direction.Normalize();
 
-        Flip(direction);               
+        Flip(direction);
+
+        //&& state == State.IDLE) state = State.FOLLOWING;        
 
         if (Mathf.Abs(character.transform.position.x - transform.position.x) < attackDistance)
         {
@@ -68,18 +63,15 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            if(state == State.ATTACKING) state = State.FOLLOWING;
-
-            if (trigger.TriggerFollow && state == State.IDLE) state = State.FOLLOWING;
+            state = State.FOLLOWING;          
         }
 
         if (state == State.FOLLOWING)
-        {
-            trigger.TriggerFollow = false;
-            MoveTo(direction);
+        {            
+            MoveTo(direction);            
         } else if(state == State.ATTACKING)
         {
-            if(action) action.ExecuteAction();
+            action.ExecuteAction();
         }
     }
 

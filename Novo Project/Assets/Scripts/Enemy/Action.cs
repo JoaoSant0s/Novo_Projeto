@@ -13,7 +13,7 @@ public abstract class Action : MonoBehaviour
     [SerializeField]
     bool activedAction;
 
-    protected bool ActivedAction
+    internal bool ActivedAction
     {
         get { return activedAction; }
         set { activedAction = value; }
