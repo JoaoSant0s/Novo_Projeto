@@ -8,6 +8,12 @@ public class Hook : MonoBehaviour
     [SerializeField]
     Rigidbody2D hook_rb;
 
+    [SerializeField]
+    Animator animator;
+
+    [SerializeField]
+    ParticleSystem particleSystem;
+
     bool destroyEnemy;
 
     internal void AddForce(Vector3 vector3, ForceMode2D force)
@@ -20,18 +26,25 @@ public class Hook : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            if(destroyEnemy) DestroyObject(collision.transform.parent.gameObject);
-            DestroyObject(gameObject);
+            particleSystem.Stop();
+            animator.SetTrigger("explode");            
+            if (destroyEnemy) DestroyObject(collision.transform.parent.gameObject);            
+            StartCoroutine(DestroyHook(animator.GetCurrentAnimatorStateInfo(0).length));
         } else if (collision.gameObject.layer == LayerMask.NameToLayer("Plataform"))
         {
+            particleSystem.Stop();
+            animator.SetTrigger("explode");            
+            StartCoroutine(DestroyHook(animator.GetCurrentAnimatorStateInfo(0).length));
             destroyEnemy = false;
-            StartCoroutine(GameObjectDestroyer());        
-        }
+        }        
     }    
-
-    IEnumerator GameObjectDestroyer()
+    
+    IEnumerator DestroyHook(float time)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitUntil(() => {
+            return animator.GetCurrentAnimatorStateInfo(0).IsName("explode") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0);
+        });
+
         DestroyObject(gameObject);
-    }
+    }    
 }
