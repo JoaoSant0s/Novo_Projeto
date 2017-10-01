@@ -79,12 +79,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Character\ArmRightController.cs" />
-    <Compile Include="Assets\Scripts\Character\BoostController.cs" />
     <Compile Include="Assets\Scripts\Character\CameraFollowCharacter.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterController.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterMotor.cs" />
     <Compile Include="Assets\Scripts\Character\Hook.cs" />
+    <Compile Include="Assets\Scripts\Character\Punch.cs" />
+    <Compile Include="Assets\Scripts\Character\PunchController.cs" />
     <Compile Include="Assets\Scripts\Character\ShotController.cs" />
     <Compile Include="Assets\Scripts\Enemy\Action.cs" />
     <Compile Include="Assets\Scripts\Enemy\ActionEnemyPunch.cs" />

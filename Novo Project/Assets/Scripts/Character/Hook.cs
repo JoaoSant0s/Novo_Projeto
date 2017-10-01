@@ -12,7 +12,7 @@ public class Hook : MonoBehaviour
     Animator animator;
 
     [SerializeField]
-    ParticleSystem particleSystem;
+    GameObject particles;
 
     bool destroyEnemy;
 
@@ -25,21 +25,25 @@ public class Hook : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            particleSystem.Stop();
-            animator.SetTrigger("explode");            
-            if (destroyEnemy) DestroyObject(collision.transform.parent.gameObject);            
-            StartCoroutine(DestroyHook(animator.GetCurrentAnimatorStateInfo(0).length));
+        {                          
+            if (destroyEnemy) DestroyObject(collision.transform.parent.gameObject);
+            PrepareToDestroy();
         } else if (collision.gameObject.layer == LayerMask.NameToLayer("Plataform"))
-        {
-            particleSystem.Stop();
-            animator.SetTrigger("explode");            
-            StartCoroutine(DestroyHook(animator.GetCurrentAnimatorStateInfo(0).length));
-            destroyEnemy = false;
+        {            
+            PrepareToDestroy();                                
         }        
+    }
+
+    void PrepareToDestroy()
+    {
+        hook_rb.bodyType = RigidbodyType2D.Static;
+        DestroyObject(particles);
+        animator.SetTrigger("explode");
+        destroyEnemy = false;
+        StartCoroutine(DestroyHook());
     }    
     
-    IEnumerator DestroyHook(float time)
+    IEnumerator DestroyHook()
     {
         yield return new WaitUntil(() => {
             return animator.GetCurrentAnimatorStateInfo(0).IsName("explode") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0);
