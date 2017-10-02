@@ -27,8 +27,8 @@ public class CharacterController : MonoBehaviour
 	void FixedUpdate () 
     {        
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGroudn);
-
-        if(grounded) motor.Move(Input.GetAxisRaw("Horizontal") * Time.fixedDeltaTime);         
+        
+        motor.Move(Input.GetAxis("Horizontal"), Input.GetAxisRaw("Horizontal"));         
 
         if (grounded && Input.GetAxisRaw("Vertical") > 0) motor.Jump();
     }    
