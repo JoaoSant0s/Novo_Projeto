@@ -25,11 +25,12 @@ public class ShotController : MonoBehaviour
     [SerializeField]
     float delayTimeShot;
 
-    
+    [SerializeField]
+    Animator animator;
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown("x"))
         {
             Shot();
         }
@@ -40,8 +41,13 @@ public class ShotController : MonoBehaviour
         if (!canShot) return;
         canShot = false;
 
+        var direction = (animator.transform.localScale.x < 0 ? -1f : 1f);
+
+        var newVector = new Vector3(direction, 0.1f, 1);
+
         var hook = Instantiate(prefabHook, spawnHookPoint.position, armRight.rotation).GetComponent<Hook>();
-        hook.AddForce(hook.transform.right * forceLaunch, ForceMode2D.Force);
+        hook.transform.localScale = new Vector3(hook.transform.localScale.x * direction, hook.transform.localScale.y, hook.transform.localScale.z);
+        hook.AddForce(newVector * forceLaunch, ForceMode2D.Force);
         StartCoroutine(ReleaseShot());
     }
 

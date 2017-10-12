@@ -8,8 +8,8 @@ public class PunchController : MonoBehaviour
     Punch punch;
 
     void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
+    {        
+        if (Input.GetKeyDown("c"))
         {
             punch.SetAttackState();
         }

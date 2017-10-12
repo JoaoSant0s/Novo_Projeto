@@ -16,9 +16,6 @@ public class CharacterMotor : MonoBehaviour
     Rigidbody2D rg;
     #endregion    
 
-    [SerializeField]
-    Animator animator;
-
     bool facingRight = true;    
     void Awake() 
     {
@@ -30,19 +27,7 @@ public class CharacterMotor : MonoBehaviour
         if(move != 0) 
         {        	
         	rg.velocity = new Vector2(move * Time.fixedDeltaTime * maxSpeend, rg.velocity.y);        	        
-    	}
-
-    	if(direction != 0) 
-    	{
-    		animator.transform.localScale = new Vector3(direction * 0.5f, 0.5f, 1f);
-    	}
-
-
-		if(move == 0){
-	    	animator.SetBool("moving", false);        	
-	    } else{
-	    	animator.SetBool("moving", true);
-    	}
+    	}    	
     }
 
     internal void Jump() 
