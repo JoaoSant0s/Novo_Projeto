@@ -20,7 +20,7 @@ public class Parallaxing : MonoBehaviour
     }
     
     void Start() 
-    {    
+    {                    
         previousCamPos = cam.position;
      
         parallaxScales = new float[backgrounds.Length];
@@ -38,7 +38,7 @@ public class Parallaxing : MonoBehaviour
         
             float backgroundTargetPosX = backgrounds[i].position.x + parallax;
 
-            Vector3 backgroundTargetPos = new Vector3(backgroundTargetPosX, backgrounds[i].position.y, backgrounds[i].position.z);
+            Vector3 backgroundTargetPos = new Vector3(backgroundTargetPosX, backgrounds[i].position.y, backgrounds[i].position.z);            
 
             backgrounds[i].position = Vector3.Lerp(backgrounds[i].position, backgroundTargetPos, smoothing * Time.deltaTime);
         }

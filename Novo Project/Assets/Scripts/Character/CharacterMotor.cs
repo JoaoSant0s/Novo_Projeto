@@ -19,7 +19,7 @@ public class CharacterMotor : MonoBehaviour
     bool facingRight = true;    
     void Awake() 
     {
-        rg = GetComponent<Rigidbody2D>();
+        rg = GetComponent<Rigidbody2D>();                        
     }
 
     internal void Move(float move, float direction) 

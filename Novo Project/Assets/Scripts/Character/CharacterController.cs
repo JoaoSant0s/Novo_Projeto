@@ -7,7 +7,7 @@ public class CharacterController : MonoBehaviour
     #region Fields 
     [Header("Jump attributes")]
     [SerializeField]
-    float groundRadius = 0.2f;
+    Vector3 boxSize;
     [SerializeField]
     Transform groundCheck;
     [SerializeField]
@@ -28,14 +28,14 @@ public class CharacterController : MonoBehaviour
 
 	void FixedUpdate () 
     {        
-        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGroudn);
-
+        grounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, whatIsGroudn);   
+                             
         var move = Input.GetAxis("Horizontal");
         var direction = Input.GetAxisRaw("Horizontal");
 
         motor.Move(move, direction);
 
-        if (grounded && Input.GetAxisRaw("Vertical") > 0) motor.Jump();
+        if (grounded && Input.GetButtonDown("Vertical")) motor.Jump();
 
         animationState(move, direction);        
     }   
